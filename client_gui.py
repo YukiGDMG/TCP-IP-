@@ -162,6 +162,7 @@ class RPSClientGUI: # 客戶端 GUI 類別
                     self.lbl_status.config(text=f"{res}", fg="orange")
                     self.lbl_timer.config(text="") # 清除計時器顯示
                     self.master.after(0, self.stop_countdown)
+                    self.master.after(0, self.game_over_ui_reset_2(res))
                     # 結果顯示後，Server 會自動送 "回到大廳" 的訊息，這裡只需顯示
 
             except:
@@ -183,6 +184,15 @@ class RPSClientGUI: # 客戶端 GUI 類別
         self.btn_match.config(text="🔍 開始配對", state=tk.NORMAL, bg="#4CAF50")
         self.lbl_status.config(text="遊戲結束，請重新配對", fg="blue")
         self.lbl_timer.config(text="") # 清除計時器顯示
+        
+    def game_over_ui_reset_2(self, r):
+        self.in_game = False     # 標記非遊戲中
+        self.stop_countdown() # 停止計時器
+        self.toggle_game_buttons(False) # 禁用出拳按鈕
+        self.toggle_type2_bottons(True) # 啟用 type2 後的按鈕
+        self.btn_match.config(text="🔍 開始配對", state=tk.NORMAL, bg="#4CAF50")
+        self.lbl_status.config(text="遊戲結束，請重新配對", fg="blue")
+        self.lbl_timer.config(text=r) # 清除計時器顯示
 
     def reset_ui(self):
         self.is_connected = False # 標記未連線
@@ -215,6 +225,4 @@ class RPSClientGUI: # 客戶端 GUI 類別
 if __name__ == '__main__':
     root = tk.Tk()
     RPSClientGUI(root) # 建立 GUI 物件
-
     root.mainloop()
-
