@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import scrolledtext, messagebox
 import socket
 import threading
-import json
+
 
 HOST = '127.0.0.1'
 PORT = 6000
@@ -215,4 +215,5 @@ class RPSClientGUI: # 客戶端 GUI 類別
 if __name__ == '__main__':
     root = tk.Tk()
     RPSClientGUI(root) # 建立 GUI 物件
+
     root.mainloop()
